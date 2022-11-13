@@ -4,24 +4,47 @@ void main() {
   runApp(const MyApp());
 }
 
-enum AnimalType { dog, goat }
+int multTwo(int val) => 2 * val;
 
-abstract class LivingThing {
-  void breathe() {
-    print('Living thing is breathing');
-  }
-
-  void move() {
-    print('I am moving');
-  }
+Future<int> leasyFuncMultTwo(int val) {
+  return Future.delayed(const Duration(seconds: 5), () => multTwo(val));
 }
 
-class Cat extends LivingThing {}
+Stream<String> getName() {
+  return Stream.periodic(
+      const Duration(seconds: 3), ((computationCount) => 'Foo'));
+}
 
-void test() {
-  final fluffers = Cat();
-  fluffers.move();
-  fluffers.breathe();
+Iterable<int> getOneToThree() sync* {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+class PairOfIntegers {
+  final int value1;
+  final int value2;
+
+  PairOfIntegers(this.value1, this.value2);
+}
+
+class PairOfStrings {
+  final String value1;
+  final String value2;
+
+  PairOfStrings(this.value1, this.value2);
+}
+
+class Pair<A, B> {
+  final A value1;
+  final B value2;
+
+  Pair(this.value1, this.value2);
+}
+
+void test() async {
+  final names = Pair(1, 'value');
+  print('${names.value1} ${names.value2}');
 }
 
 class MyApp extends StatelessWidget {
